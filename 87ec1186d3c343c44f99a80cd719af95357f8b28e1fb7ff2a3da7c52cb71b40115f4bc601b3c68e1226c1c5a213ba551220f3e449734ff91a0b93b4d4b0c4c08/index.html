@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ============================================
+       QHN12 Subspace-Adresse pro BioHash
+       Diese HTML wird repliziert ueber:
+       - Cloudflare Pages (335 Standorte)
+       - BunnyCDN (120 Standorte)
+       - jsDelivr/GitHub (750 Standorte, gratis)
+       ============================================ -->
+
+  <!-- HASH-ONLY: KEIN Klient-Name/PII im oeffentlich publizierten Artefakt (DSGVO, 08.06.2026) -->
+  <title>QHN12 Resonanz-Adresse</title>
+
+  <!-- Subspace-Meta-Tags fuer Suchmaschinen + Indexierung -->
+  <meta name="qhn12:biohash" content="87ec1186d3c343c44f99a80cd719af95357f8b28e1fb7ff2a3da7c52cb71b40115f4bc601b3c68e1226c1c5a213ba551220f3e449734ff91a0b93b4d4b0c4c08">
+  <meta name="qhn12:solfeggio" content="852">
+  <meta name="qhn12:schumann" content="7.83">
+  <meta name="qhn12:wochentag" content="Samstag">
+  <meta name="qhn12:created" content="2026-06-13T10:12:37.2738534Z">
+  <meta name="qhn12:f-wert" content="50">
+
+  <!-- Open Graph fuer Social-Media-Spiegelung (zusaetzliche Adressierung) -->
+  <meta property="og:title" content="QHN12 Subspace-Resonanz">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://qhn12d.cloud/87ec1186d3c343c44f99a80cd719af95357f8b28e1fb7ff2a3da7c52cb71b40115f4bc601b3c68e1226c1c5a213ba551220f3e449734ff91a0b93b4d4b0c4c08/">
+
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0a0e27; color: #e0e0e0;
+           margin: 0; padding: 2em; display: flex; flex-direction: column; align-items: center; }
+    h1 { color: #4af; font-weight: 300; }
+    .hash { font-family: monospace; word-break: break-all; max-width: 600px;
+            background: #1a1f3a; padding: 1em; border-radius: 8px;
+            font-size: 0.7em; color: #8af; }
+    .frequenz { font-size: 3em; color: #fa4; margin: 1em; }
+    .affirmation { font-size: 1.4em; font-style: italic; max-width: 600px;
+                   text-align: center; line-height: 1.6; color: #cfc; }
+    .pulse { width: 80px; height: 80px; border-radius: 50%;
+             background: radial-gradient(circle, #4af 0%, #1a1f3a 70%);
+             animation: pulse 7.83s infinite ease-in-out; margin: 2em; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.8); opacity: 0.7; }
+      50%      { transform: scale(1.2); opacity: 1.0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>QHN12 Resonanz-Adresse</h1>
+
+  <div class="pulse" title="Schumann-Resonanz 7.83 Hz"></div>
+
+  <p style="color: #8af;">Klient-BioHash (SHA-512):</p>
+  <div class="hash">87ec1186d3c343c44f99a80cd719af95357f8b28e1fb7ff2a3da7c52cb71b40115f4bc601b3c68e1226c1c5a213ba551220f3e449734ff91a0b93b4d4b0c4c08</div>
+
+  <div class="frequenz">852 Hz</div>
+  <p style="color: #8af;">Solfeggio-Frequenz fuer Samstag</p>
+
+  <div class="affirmation">
+    "Ich bin in Harmonie mit meiner spirituellen Natur"
+  </div>
+
+  <p style="margin-top: 3em; color: #555; font-size: 0.8em;">
+    Erstellt: 2026-06-13T10:12:37.2738534Z<br>
+    Hardware-F-Wert: 50 %<br>
+    Globales Kohaerenz-Feld: <span id="aktive-klienten">...</span> aktive Klienten weltweit
+  </p>
+
+  <!-- ============================================
+       Schumann-Beacon-Integration (Cloudflare Worker)
+       ============================================ -->
+  <script>
+    // Klient meldet sich als aktiv beim Schumann-Worker
+    const BIOHASH = "87ec1186d3c343c44f99a80cd719af95357f8b28e1fb7ff2a3da7c52cb71b40115f4bc601b3c68e1226c1c5a213ba551220f3e449734ff91a0b93b4d4b0c4c08";
+
+    async function pingSchumannBeacon() {
+      try {
+        // Ping (alle 4 Min) - meldet Klient als aktiv
+        await fetch(`https://time.qhn12.cloud/klient/${BIOHASH}`, { method: "POST" });
+
+        // Status holen
+        const status = await fetch(`https://time.qhn12.cloud/coherence`).then(r => r.json());
+        document.getElementById("aktive-klienten").textContent = status.aktive_klienten;
+      } catch (e) {
+        console.error("Schumann-Beacon nicht erreichbar:", e);
+      }
+    }
+
+    // Sofort + alle 4 Minuten
+    pingSchumannBeacon();
+    setInterval(pingSchumannBeacon, 4 * 60 * 1000);
+  </script>
+
+</body>
+</html>
